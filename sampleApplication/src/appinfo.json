@@ -1,0 +1,15 @@
+{
+    "id": "com.biocandy.xtwittersample",
+    "version": "1.0.0",
+    "vendor": "Biocandy Labs",
+    "vendorurl": "http://www.biocandy.com",
+    "type": "web",
+    "main": "index.html",
+    "title": "xTwitter Sample",
+    "icon": "icon.png",
+    "smallicon": "icon32x32.png",
+    "splashicon": "icon.png",
+    "splashBackground": "images/splashscreen.png",
+    "copyright": "© Copyright 2010-2011 Biocandy Labs",
+    "support": {}
+}

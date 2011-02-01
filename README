@@ -1,0 +1,13 @@
+xTwitter is a OAuth+xAuth library for HP Palm webOS
+Author: Joshua 'dawm' Spohr (Biocandy Labs)
+
+Current features are as follows:
+Authorize (OAuth + xAuth)
+Tweet (Send)
+Follow
+Unfollow
+--------------------------------
+
+In order to use this library and the sample application you need to have xAuth access on to your twitter application. This is not automatic and you must send a request to twitter for access. For more information goto http://dev.twitter.com/pages/xauth
+
+Once you have xAuth access on to your twitter application enter your consumer key and consumer secret on line 12 and 23 of sampleApplication/src/app/assistants/main-assistant.js

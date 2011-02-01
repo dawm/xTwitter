@@ -1,0 +1,173 @@
+<style type="text/css">
+#mojo-scene-xtwitter-scene-scroller {
+	background: #b9deee url(images/xTwitter/background.png) no-repeat;
+}
+#twitter {
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 65px;
+	background-color: #8dd2f0;
+	border-color: #8dd2f0;
+	border-radius: 10px;
+	border-style: solid;
+	border-width: 0px;
+}
+
+#twitter a, a:visited { color: #00aad4; text-decoration: none !important; }
+#twitter a:active { color: #ff552b; }
+#twitter h1,
+#twitter h4 { font-size: 14px; font-weight: normal; margin: 0px; margin-bottom: 5px; }
+#twitter h2 { font-size: 18px; font-weight: bold; margin: 0px; margin-bottom: 5px; }
+#twitter h3 { font-size: 12px; font-weight: normal; margin: 0px; margin-top: 8px; margin-bottom: 8px; }
+#twitter h4 { text-align: center; margin-top: -6px; margin-bottom: 10px; }
+#twitter hr { height: 1px; border: 0px; background-color: #33ace7; margin:0px; margin-left: 30px; margin-right: 30px; px; padding:0px; }
+#twitter .textbox {
+	background: transparent;
+	border-width: 9px 9px;
+	-webkit-box-sizing: border-box;
+	-webkit-border-image: url('images/xTwitter/textbox.png') 9 9 repeat; /*9 9 9 9 repeat;*/
+	font-size: 20px;
+	line-height: 20px;
+	height: 33px;
+	padding: 0px;
+	margin: 5px;
+	margin-top: 0px;
+	margin-bottom: 2px;
+}
+#twitter .buttons #allow {
+	font-weight: bold !important;
+}
+#twitter .buttons h3 { color: #484848;}
+#twitter .buttons h3 a,
+#twitter .buttons h3 a:visited { color: #000; }
+#twitter .buttons h3 a:active { color: #00aad4; }
+#twitter .btn {
+	background: #DDD url(images/xTwitter/bg-btn.gif) repeat-x 0px 0px;
+	border-bottom-color: #CCC;
+	border-bottom-left-radius: 4px 4px;
+	border-bottom-right-radius: 4px 4px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #DDD #DDD #CCC;
+	border-top-left-radius: 4px 4px;
+	border-top-right-radius: 4px 4px;
+	color: #333;
+	cursor: pointer;
+	font: normal normal normal 11px/14px 'Lucida Grande', sans-serif;
+	margin: 0px;
+	overflow: visible;
+	padding: 4px 8px 5px;
+	text-shadow: white 1px 1px 0px;
+	width: auto;
+}
+#twitter .btn-l {
+	background-position: 0px -400px;
+	border-bottom-left-radius: 6px 6px;
+	border-bottom-right-radius: 6px 6px;
+	border-top-left-radius: 6px 6px;
+	border-top-right-radius: 6px 6px;
+	font-size: 20px;
+	line-height: 26px;
+	padding: 7px 20px 9px;
+}
+#twitter .btn-blue {
+	background-color: #39D !important;
+	background-image: url(images/xTwitter/bg-btn-blue.gif) !important;
+	border-color: #39D #39D #28C !important;
+	color: white !important;
+	text-shadow: #39D -1px -1px 0px !important;
+}
+#twitter .btn.selected,
+#twitter .btn-blue.selected {
+	background-image: none  !important;
+}
+#twitter .info {
+	padding-top: 8px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+#twitter #error {
+	margin-left: 20px;
+	margin-right: 20px;
+	padding: 5px;
+	background-color: #ffbcac;
+	border-color: #ffbcac;
+	border-radius: 10px 10px 0px 0px;
+	border-style: solid;
+	border-width: 1px;
+	width: 230px;
+	display: block;
+}
+#twitter .content {
+	padding-top: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	background-color: #FFF;
+	border-color: #FFF;
+	border-radius: 10px 10px;
+	border-style: solid;
+	border-width: 1px;
+}
+#twitter .signup {
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 5px;
+}
+#twitter #login {}
+#twitter #success {}
+#twitter #success .info {
+	background: url('images/xTwitter/success.png') no-repeat;
+	background-position: 15px 15px;
+	padding-top: 25px;
+	padding-left: 95px;
+	height: 70px;
+	font-size: 36px;
+	font-weight: bold;
+}
+#twitter #success .content h1 { margin-bottom: 10px; }
+</style>
+<div class="palm-scrim" id="scrim">
+    <div x-mojo-element="Spinner" id="progressSpinner"></div>
+</div>
+<div id="twitter">
+	<div id="login">
+		<div class="info">
+			<h1>This application would like the ability to access your data on Twitter.</h1>
+		</div>
+		<div id="error"></div>
+		<div class="content">
+			<h2>Username or email</h2>
+			<input id="username" type="text" class="textbox">
+			<h2>Password</h2>
+			<input id="password" type="password" class="textbox">
+			<h3 style="text-align:center">Your password will not be stored.</h3>
+			<div class="buttons" align="center">
+				<input x-mojo-touch-feedback="spontaneous" type="button" value="Deny" id="deny" class="btn btn-l">
+				<input x-mojo-touch-feedback="spontaneous" type="button" value="Allow" id="allow" class="btn btn-l btn-blue">
+
+				<h3>By clicking "Allow" you continue to operate under Twitter's <a href="http://twitter.com/tos">Terms of Service</a></h3>
+			</div>
+			<hr />
+			<div class="signup">
+				<h1>Don't have a Twitter account?</h1>
+				<h1><a href="http://www.twitter.com/signup">Sign up now!</a></h1>
+			</div>
+		</div>
+	</div>
+	<div id="success">
+		<div class="info">
+			Success!
+		</div>
+		<div class="content">
+			<h1>We have successfully logged into Twitter.</h1>
+			<h1>This application <strong>does not</strong> store your password, it only stores the OAuth Tokens provided from Twitter in order to publish Tweets.</h1>
+			<h1>If you would like to stop Twitter integration you can do so via Preferences or visit the Twitter Connections page to revoke access.</h1>
+
+			<h4><a href="https://twitter.com/settings/connections">https://twitter.com/settings/connections</a><br/>(<strong>must be viewed in standard mode</strong>)</h4>
+			<div class="buttons" align="center">
+				<input x-mojo-touch-feedback="spontaneous" type="button" value="Go Back" id="goback" class="btn btn-l">
+			</div>
+			&nbsp;
+		</div>
+	</div>
+</div>
