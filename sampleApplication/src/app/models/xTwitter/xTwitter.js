@@ -7,8 +7,6 @@ function xTwitter(appKeys, userKeys) {
 	Version: 1.0
 	*/
 
-	this.isLoaded = true;
-
 	// OAuth / xAuth
 	this.auth_url = "https://api.twitter.com/oauth/access_token";
 	// Tweet
@@ -21,6 +19,8 @@ function xTwitter(appKeys, userKeys) {
 	if (appKeys.consumerKey === undefined) { Mojo.Log.error('###xTwitter - ERROR NO CONSUMER KEY! (appkeys)'); return false; }
 	if (appKeys.consumerSecret === undefined) { Mojo.Log.error('###xTwitter - ERROR NO CONSUMER SECRET! (appkeys)'); return false; }
 
+	this.isLoaded = true;
+	
 	this.options = {
 		consumerKey: appKeys.consumerKey,
 		consumerSecret: appKeys.consumerSecret,
