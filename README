@@ -10,4 +10,6 @@ Unfollow
 
 In order to use this library and the sample application you need to have xAuth access on to your twitter application. This is not automatic and you must send a request to twitter for access. For more information goto http://dev.twitter.com/pages/xauth
 
+For more information on Twitter's xAuth, dohtem (from #webos on irc.freenode.net) found a great article on the subject: http://www.reynoldsftw.com/2010/03/using-xauth-an-alternate-oauth-from-twitter/
+
 Once you have xAuth access on to your twitter application enter your consumer key and consumer secret on line 12 and 23 of sampleApplication/src/app/assistants/main-assistant.js
