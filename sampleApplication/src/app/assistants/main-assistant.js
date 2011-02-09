@@ -140,7 +140,7 @@ MainAssistant.prototype.buttonTweet = function(event) {
 	}
 	Twitter.tweet(
 		{
-			status: randString(),
+			status: 'Testing out #xTwitter by @biocandy/@dawm for #webOS (rand string:'+randString()+')',
 			trim_user: true,
 			include_entities: false
 
