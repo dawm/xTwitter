@@ -16,11 +16,11 @@ function xTwitter(appKeys, userKeys) {
 	// Unfollow
 	this.unfollow_url = "http://api.twitter.com/1/friendships/destroy.json";
 
-	if (appKeys.consumerKey === undefined) { Mojo.Log.error('###xTwitter - ERROR NO CONSUMER KEY! (appkeys)'); return false; }
-	if (appKeys.consumerSecret === undefined) { Mojo.Log.error('###xTwitter - ERROR NO CONSUMER SECRET! (appkeys)'); return false; }
+	if (appKeys.consumerKey === undefined || appKeys.consumerKey == "") { Mojo.Log.error('###xTwitter - ERROR NO CONSUMER KEY! (appkeys)'); return false; }
+	if (appKeys.consumerSecret === undefined || appKeys.consumerSecret == "") { Mojo.Log.error('###xTwitter - ERROR NO CONSUMER SECRET! (appkeys)'); return false; }
 
 	this.isLoaded = true;
-	
+
 	this.options = {
 		consumerKey: appKeys.consumerKey,
 		consumerSecret: appKeys.consumerSecret,
