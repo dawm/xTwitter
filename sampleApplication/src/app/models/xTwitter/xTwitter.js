@@ -28,7 +28,8 @@ function xTwitter(appKeys, userKeys) {
 	Author: Joshua Spohr (dawm) / Biocandy Labs
 	Email: josh.spohr@biocandy.com
 	Twitter: @dawm / @biocandy
-	Version: 1.0
+	GitHub: https://github.com/dawm/xTwitter
+	Version: 1.0.5
 	*/
 
 	// OAuth / xAuth
@@ -137,7 +138,15 @@ xTwitter.prototype.logout = function(name) {
 };
 xTwitter.prototype.tweet = function(parameters, callback) {
 
-	if (parameters !== undefined) {
+	// Thanks Will Honey (Tibfib) for the suggestion of checking the variable for its type
+	// If parameters is a string we build our parameters object using the string as the status
+	// If parameters is an object we do nothing and let Twitter complain
+	if (parameters !== undefined && (typeof(parameters) == 'object' || typeof(parameters) == 'string')) {
+
+		if (typeof(parameters) == 'string') {
+			parameters = { status: parameters };
+		}
+
 		// A full list of parameters can be found here -> http://dev.twitter.com/doc/post/statuses/update
 		var tweetParameters = OAuth.formEncode(parameters);
 
@@ -179,7 +188,12 @@ xTwitter.prototype.tweet = function(parameters, callback) {
 };
 xTwitter.prototype.follow = function(parameters, callback) {
 
-	if (parameters !== undefined) {
+	if (parameters !== undefined && (typeof(parameters) == 'object' || typeof(parameters) == 'string')) {
+
+		if (typeof(parameters) == 'string') {
+			parameters = { screen_name: parameters };
+		}
+
 		// A full list of parameters can be found here -> http://dev.twitter.com/doc/post/friendships/create
 		var followParameters = OAuth.formEncode(parameters);
 
@@ -221,7 +235,12 @@ xTwitter.prototype.follow = function(parameters, callback) {
 };
 xTwitter.prototype.unfollow = function(parameters, callback) {
 
-	if (parameters !== undefined) {
+	if (parameters !== undefined && (typeof(parameters) == 'object' || typeof(parameters) == 'string')) {
+
+		if (typeof(parameters) == 'string') {
+			parameters = { screen_name: parameters };
+		}
+		
 		// A full list of parameters can be found here -> http://dev.twitter.com/doc/post/friendships/destroy
 		var unfollowParameters = OAuth.formEncode(parameters);
 

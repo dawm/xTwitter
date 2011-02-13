@@ -73,24 +73,32 @@ MainAssistant.prototype.setup = function() {
 	this.controller.setupWidget("buttonAuth", {},
 		this.buttonAuthModel = {
 			label: "Authorize this app",
-			disabled: false
+			disabled: (Twitter.isLoaded !== undefined) ? false : true
 		}
 	);
 	this.controller.setupWidget("buttonTweet", {},
 		this.buttonTweetModel = {
 			label: "Send a test Tweet",
 			// If we are already authorized lets enable this button.
-			disabled: (this.userKeys.authorized === true) ? false : true
+			disabled: (this.userKeys.authorized === true && Twitter.isLoaded !== undefined) ? false : true
 		}
 	);
 	this.controller.setupWidget("buttonFollow", {},
 		this.buttonFollowModel = {
 			label: "Follow @dawm",
 			// If we are already authorized lets enable this button.
-			disabled: (this.userKeys.authorized === true) ? false : true
+			disabled: (this.userKeys.authorized === true && Twitter.isLoaded !== undefined) ? false : true
 		}
 	);
 
+	// Double checking if library was loaded, if not the keys were not entered.
+	if (Twitter.isLoaded === undefined) {
+		this.appMenuModel.items[2].disabled = true;
+		this.controller.modelChanged(this.appMenuModel);
+		this.controller.get('info').innerHTML = 'Did you enter your Consumer Key/Secret? Library not loaded!';
+	}
+
+	// Dump our userKey data into our showKeys div
 	this.controller.get('showKeys').innerHTML = Object.toJSON(this.userKeys);
 };
 MainAssistant.prototype.aboutToActivate = function(callback) {
@@ -201,7 +209,9 @@ MainAssistant.prototype.logout = function() {
 		token: '',
 		secret: ''
 	};
-	Twitter.logout();
+	if (Twitter.isLoaded !== undefined) {
+		Twitter.logout();
+	}
 	this.cookie.remove();
 
 	// Disable the tweet button

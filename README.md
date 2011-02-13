@@ -33,24 +33,24 @@ Current features/functions:
   2. Tweet (Send)  
   3. Follow  
   4. Unfollow  
-  5. Logout
+  5. Logout  
 
 
 ## Notes on xAuth ##
 
 xTwitter relies on the use of [xAuth](http://dev.twitter.com/pages/xauth) to authenticate with Twitter. We do not distribute our consumer key and secret per Twitter's request.  
-You will need to:
+You will need to:  
 
   1. [Register an application at Twitter](https://twitter.com/apps/new), and get your own consumer key and secret.  
   2. Request [xAuth](http://dev.twitter.com/pages/xauth) access by emailing <api@twitter.com> ([more info](http://dev.twitter.com/pages/xauth))  
 
-For more information on Twitter's xAuth, dohtem (from #webos on irc.freenode.net) found a great [article on the subject](http://www.reynoldsftw.com/2010/03/using-xauth-an-alternate-oauth-from-twitter/).
+For more information on Twitter's xAuth, dohtem (from #webos on irc.freenode.net) found a great [article on the subject](http://www.reynoldsftw.com/2010/03/using-xauth-an-alternate-oauth-from-twitter/).  
 
 ---
 
 ## Trying out the sample application ##
 
-Once you have xAuth access, enter your consumer key and consumer secret on the *lines 12 and 13* of `sampleApplication/src/app/assistants/main-assistant.js`, then package and install the application on your device or emulator.
+Once you have xAuth access, enter your consumer key and consumer secret on the *lines 12 and 13* of `sampleApplication/src/app/assistants/main-assistant.js`, then package and install the application on your device or emulator.  
 
 ---
 
@@ -60,7 +60,7 @@ At this time we have not this section finished, but you are welcome to browse th
 
 You **do not** have to modify any of the xTwitter library files (`/library/app/assistants/xtwitter-assistant.js /library/app/models/xTwitter/*.* /library/app/views/xTwitter/*.*`) as everything can be configured thru the creation of the library object.  
 
-You **do need** to include the code from the `library/sources.json` in your applications `sources.json`  
+You **do need** to include the code from the `library/sources.json` in your applications `sources.json`.  
 
 Initial setup is simple, just put the following code inside your app using the objects below to initialize xTwitter.  
 
@@ -90,18 +90,19 @@ xTwitter is now loaded and ready to use.
 # Authorization #
 
 To authorize your app for access to the users twitter account use the function: **Twitter.authorize(username,password,*callback*);**  
+
 username = the user's twitter account name.  
 password = the user's twitter account password. (Note: we do not save the user's password)  
 callback = the callback function to call when done (optional).  
 
 **Example**:
-	
+
 	Twitter.authorize('username','password123',function (response) {
 		if (response !== undefined && response.username !== undefined && response.token !== undefined &&
 		    response.secret !== undefined && response.authorized !== undefined && response.authorized === true) {
 			// Authorization successful
-		
-			/* 
+
+			/*
 			* You will need save the following variables (in a cookie, depot.. etc perhaps?)
 			* We reuse this information during the library initialization and so that
 			* we do not have to reauthorize every time
@@ -110,7 +111,7 @@ callback = the callback function to call when done (optional).
 			userKeys.username = response.username;
 			userKeys.token = response.token;
 			userKeys.secret = response.secret;
-			userKeys.authorized = true;		
+			userKeys.authorized = true;
 		} else {
 			// Authorization failed
 			console.log('Authorization failed, error:'+response);
@@ -121,12 +122,12 @@ callback = the callback function to call when done (optional).
 
 # Sending a tweet #
 
-To send a tweet after you have successfully authorized with Twitter use the function: **Twitter.tweet(tweetObj,*callback*);**  
+To send a tweet after you have successfully authorized with Twitter use can the function: **Twitter.tweet(tweetObj,*callback*);**  
 
 tweetObj = Object containing the required tweet parameters. [Read more...](http://dev.twitter.com/doc/post/statuses/update)  
 callback = the callback function to call when done (optional).  
 
-**Example**:  
+**Example**:
 
 	Twitter.tweet(
 		{ status: 'This is my test tweet' },
@@ -139,6 +140,22 @@ callback = the callback function to call when done (optional).
 		}
 	);
 
+## An alternate use ##
+*Suggested by Will Honey (Tibfib)*  
+
+You can also send a tweet with a string instead of an object: **Twitter.tweet(string,*callback*);**  
+
+string = A string containing the contents of the tweet.  
+callback = the callback function to call when done (optional).  
+
+**Example**:
+
+	Twitter.tweet('This is my tweet',
+		function(response) {
+			// ...
+		}
+	);
+
 ---
 
 # Following a user #
@@ -148,7 +165,7 @@ To follow a user (again you must have previously authorized successfully) use th
 followObj = Object containing the required follow parameters. [Read more...](http://dev.twitter.com/doc/post/friendships/create)  
 callback = the callback function to call when done (optional).  
 
-**Example**:  
+**Example**:
 
 	Twitter.follow(
 		{ screen_name: 'dawm' },
@@ -161,16 +178,31 @@ callback = the callback function to call when done (optional).
 		}
 	);
 
+## An alternate use ##
+
+You can also follow a user with a string instead of an object: **Twitter.follow(string,*callback*);**  
+
+string = A string containing the username to follow.  
+callback = the callback function to call when done (optional).  
+
+**Example**:
+
+	Twitter.follow('dawm',
+		function(response) {
+			// ...
+		}
+	);
+
 ---
 
 # Unfollow a user #
 
 To unfollow a user (again you must have previously authorized successfully) use the function: **Twitter.unfollow(unfollowObj,*callback*);**  
 
-unfollowObj = Object containing the required follow parameters. [Read more...](http://dev.twitter.com/doc/post/friendships/destroy)  
+unfollowObj = Object containing the required unfollow parameters. [Read more...](http://dev.twitter.com/doc/post/friendships/destroy)  
 callback = the callback function to call when done (optional).  
 
-**Example**:  
+**Example**:
 
 	Twitter.unfollow(
 		{ screen_name: 'dawm' },
@@ -189,6 +221,21 @@ callback = the callback function to call when done (optional).
 		}
 	);
 
+## An alternate use ##
+
+You can also unfollow a user with a string instead of an object: **Twitter.unfollow(string,*callback*);**  
+
+string = A string containing the username to unfollow.  
+callback = the callback function to call when done (optional).  
+
+**Example**:
+
+	Twitter.unfollow('dawm',
+		function(response) {
+			// ...
+		}
+	);
+
 ---
 
 # Logout #
@@ -200,7 +247,7 @@ Your application should also destroy any stored data regarding the users key and
 **Example**:
 
 	Twitter.logout();
-	userKeys = { 
+	userKeys = {
 		username: '',
 		authorized: false,
 		token: '',
