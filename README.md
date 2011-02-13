@@ -38,7 +38,8 @@ Current features/functions:
 
 ## Notes on xAuth ##
 
-xTwitter relies on the use of [xAuth](http://dev.twitter.com/pages/xauth) to authenticate with Twitter. We do not distribute our consumer key and secret per Twitter's request. You will need to:
+xTwitter relies on the use of [xAuth](http://dev.twitter.com/pages/xauth) to authenticate with Twitter. We do not distribute our consumer key and secret per Twitter's request.  
+You will need to:
 
   1. [Register an application at Twitter](https://twitter.com/apps/new), and get your own consumer key and secret.  
   2. Request [xAuth](http://dev.twitter.com/pages/xauth) access by emailing <api@twitter.com> ([more info](http://dev.twitter.com/pages/xauth))  
@@ -49,7 +50,7 @@ For more information on Twitter's xAuth, dohtem (from #webos on irc.freenode.net
 
 ## Trying out the sample application ##
 
-Once you have xAuth access, enter your consumer key and consumer secret on the *lines 12 and 13* of sampleApplication/src/app/assistants/main-assistant.js, then package and install the application on your device or emulator.
+Once you have xAuth access, enter your consumer key and consumer secret on the *lines 12 and 13* of `sampleApplication/src/app/assistants/main-assistant.js`, then package and install the application on your device or emulator.
 
 ---
 
@@ -57,9 +58,9 @@ Once you have xAuth access, enter your consumer key and consumer secret on the *
 
 At this time we have not this section finished, but you are welcome to browse the source of the sample application to see how we used the library in it. We tried to comment as much of the code that wasn't clearly obvious as to what it does or was doing.  
 
-You do not have to modify any of the xTwitter library files (/library/app/assistants/xtwitter-assistant.js /library/app/models/xTwitter/`*.*` /library/app/views/xTwitter/`*.*`) as everything can be configured thru the creation of the library object.  
+You **do not** have to modify any of the xTwitter library files (`/library/app/assistants/xtwitter-assistant.js /library/app/models/xTwitter/*.* /library/app/views/xTwitter/*.*`) as everything can be configured thru the creation of the library object.  
 
-You **do need** to include the code from the library/sources.json in your applications sources.json  
+You **do need** to include the code from the `library/sources.json` in your applications `sources.json`  
 
 Initial setup is simple, just put the following code inside your app using the objects below to initialize xTwitter.  
 
@@ -74,7 +75,7 @@ Initial setup is simple, just put the following code inside your app using the o
 		secret: ''
 	};
 
-In the main library file (/library/app/models/xTwitter/xTwitter.js), the last line of the file is where we have setup our **Twitter** variable, you can rename this or not even use it but we added it for simplicity sake and some of our sample code relize on it.  
+In the main library file (`/library/app/models/xTwitter/xTwitter.js`), the last line of the file is where we have setup our **Twitter** variable, you can rename this or not even use it but we added it for simplicity sake and some of our sample code relies on it.  
 
 Using that variable **Twitter** which we already have setup we can assign and start the library.  
 
@@ -98,17 +99,20 @@ callback = the callback function to call when done (optional).
 	Twitter.authorize('username','password123',function (response) {
 		if (response !== undefined && response.username !== undefined && response.token !== undefined &&
 		    response.secret !== undefined && response.authorized !== undefined && response.authorized === true) {
-			// authorization successful
+			// Authorization successful
 		
-			// you will need save the following variables (in a cookie perhaps?)
-			// we reuse the information during the library initilization and so that we do not have to reauthorize every time
+			/* 
+			* You will need save the following variables (in a cookie, depot.. etc perhaps?)
+			* We reuse this information during the library initialization and so that
+			* we do not have to reauthorize every time
+			*/
 
 			userKeys.username = response.username;
 			userKeys.token = response.token;
 			userKeys.secret = response.secret;
 			userKeys.authorized = true;		
 		} else {
-			// authorization failed
+			// Authorization failed
 			console.log('Authorization failed, error:'+response);
 		}
 	);
@@ -172,8 +176,12 @@ callback = the callback function to call when done (optional).
 		{ screen_name: 'dawm' },
 		function (response) {
 			if (response !== undefined && response.error === undefined && response.following === true) {
-				// note that response.following will return true since it was true when you made the call
-				// if you unfollow the user a second time it will fail, since you are not following them.
+				/*
+				* Note that response.following will return true if successful. I don't know why Twitter
+				* does this (API lag?) since you would think it should be false when successfully unfollowing.
+				* --
+				* If you unfollow the user a second time it will fail, since you are not following them.
+				*/
 				console.log('Unfollow successful');
 			} else {
 				console.log('Unfollow failed, error: "+response.error);
@@ -185,8 +193,9 @@ callback = the callback function to call when done (optional).
 
 # Logout #
 
-To logout a user (this only clears our data, the user must still unauthorize the app on Twitters Connections page), use the function: **Twitter.logout()**  
-In order to access the user's Twitter data we need to reauthorize to get the user's **token** and **secret**.
+To logout a user (this only clears the library data, the user must still unauthorize the app on Twitters Connections page), use the function: **Twitter.logout()**  
+In order to access the user's Twitter data we need to reauthorize to get the user's **token** and **secret**.  
+Your application should also destroy any stored data regarding the users key and secret.  
 
 **Example**:
 
