@@ -59,7 +59,7 @@ At this time we have not this section finished, but you are welcome to browse th
 
 You do not have to modify any of the xTwitter library files (/library/app/assistants/xtwitter-assistant.js /library/app/models/xTwitter/`*.*` /library/app/views/xTwitter/`*.*`) as everything can be configured thru the creation of the library object.  
 
-You do need to include the code from the library/sources.json in your applications sources.json  
+You **do need** to include the code from the library/sources.json in your applications sources.json  
 
 Initial setup is simple, just put the following code inside your app using the objects below to initialize xTwitter.  
 
@@ -185,7 +185,7 @@ callback = the callback function to call when done (optional).
 
 # Logout #
 
-To logout a user (this only clears our data, the user must still unauthorize the app on Twitters Connections page), use the function: **Twitter.logout()**
+To logout a user (this only clears our data, the user must still unauthorize the app on Twitters Connections page), use the function: **Twitter.logout()**  
 In order to access the user's Twitter data we need to reauthorize to get the user's **token** and **secret**.
 
 **Example**:
